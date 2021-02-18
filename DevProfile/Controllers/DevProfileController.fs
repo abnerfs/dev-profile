@@ -3,18 +3,22 @@
 open Microsoft.AspNetCore.Mvc
 open DevProfile.Repositories
 open DevProfile.Models
+open DevProfile.Responses
 open System
+open AutoMapper
 
 [<Controller>]
 [<Route("dev-profile")>]
-type DevProfileControler(repo: IDevProfileRepository) =
+type DevProfileControler(repo: IDevProfileRepository, mapper: IMapper) =
     inherit ControllerBase()
     
     [<HttpGet("{email}")>]
     member __.GetDevProfile([<FromRoute>] email: string) : IActionResult =
         let profile = repo.GetProfileByEmail(email)
         match profile with
-        | Some(x) -> OkObjectResult(profile) :> IActionResult
+        | Some(x) -> 
+                let response = mapper.Map<DevProfileResponse>(x)
+                OkObjectResult(response) :> IActionResult
         | None -> NotFoundResult() :> IActionResult
 
 
@@ -46,11 +50,11 @@ type DevProfileControler(repo: IDevProfileRepository) =
         |]
 
         profile.ProfileSkills <- [|
-            DevProfileSkills(
+            DevProfileSkill(
                 SkillName = "C#",
                 SkillValue = 10
             )
-            DevProfileSkills(
+            DevProfileSkill(
                 SkillName = "F#",
                 SkillValue = 2
             )

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Include="Config\DatabaseConfig.fs" />
+    <Compile Include="Responses\DevProfileResponses.fs" />
     <Compile Include="Services\DbService.fs" />
     <Compile Include="Repositories\BaseRepository.fs" />
     <Compile Include="Models\DevProfile.fs" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.11.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
   </ItemGroup>

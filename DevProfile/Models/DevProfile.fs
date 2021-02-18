@@ -18,7 +18,7 @@ type DevProfileLink() =
     [<BsonElement("link_order")>]
     member val LinkOrder : int = 0 with get, set
 
-type DevProfileSkills() =
+type DevProfileSkill() =
     [<BsonId>]
     [<BsonRepresentation(BsonType.ObjectId)>]
     member val SkillId : string = ObjectId.GenerateNewId().ToString() with get, set
@@ -74,7 +74,7 @@ type DevProfile() =
     member val ProfileLinks : DevProfileLink[] = null with get, set
 
     [<BsonElement("profile_skills")>]
-    member val ProfileSkills : DevProfileSkills[] = null with get, set
+    member val ProfileSkills : DevProfileSkill[] = null with get, set
 
     [<BsonElement("profile_exps")>]
     member val ProfileExps : DevProfileExp[] = null with get, set

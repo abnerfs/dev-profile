@@ -14,6 +14,8 @@ open DevProfile.Config
 open DevProfile.Models
 open DevProfile.Services
 open DevProfile.Repositories
+open DevProfile.Responses
+
 
 type Startup(configuration: IConfiguration) =
     member _.Configuration = configuration
@@ -27,6 +29,15 @@ type Startup(configuration: IConfiguration) =
         services.AddTransient<IDevProfileRepository, DevProfileRepository>() |> ignore
         services.AddTransient<IDbService, DbService>() |> ignore
 
+        let config = AutoMapper.MapperConfiguration(fun cfg -> 
+            cfg.CreateMap<DevProfile.Models.DevProfile, DevProfileResponse>() |> ignore
+            cfg.CreateMap<DevProfile.Models.DevProfileLink, DevProfileLinkResponse>() |> ignore
+            cfg.CreateMap<DevProfile.Models.DevProfileExp, DevProfileExpResponse>() |> ignore
+            cfg.CreateMap<DevProfile.Models.DevProfileSkill, DevProfileSkillResponse>() |> ignore
+        )
+
+        let mapper = config.CreateMapper()
+        services.AddSingleton(mapper) |> ignore
 
         // Add framework services.
         services.AddControllers() |> ignore
@@ -35,6 +46,7 @@ type Startup(configuration: IConfiguration) =
     member _.Configure(app: IApplicationBuilder, env: IWebHostEnvironment) =
         if (env.IsDevelopment()) then
             app.UseDeveloperExceptionPage() |> ignore
+
         app.UseRouting()
            .UseAuthorization()
            .UseEndpoints(fun endpoints ->

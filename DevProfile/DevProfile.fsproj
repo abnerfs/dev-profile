@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Config\DatabaseConfig.fs" />
+    <Compile Include="Services\DbService.fs" />
+    <Compile Include="Repositories\BaseRepository.fs" />
+    <Compile Include="Models\DevProfile.fs" />
+    <Compile Include="Repositories\DevProfileRepository.fs" />
+    <Compile Include="Controllers\DevProfileController.fs" />
+    <Compile Include="WeatherForecast.fs" />
+    <Compile Include="Startup.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.11.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
+  </ItemGroup>
+
+</Project>

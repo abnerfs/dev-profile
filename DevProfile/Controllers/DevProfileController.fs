@@ -10,8 +10,18 @@ open System
 type DevProfileControler(repo: IDevProfileRepository) =
     inherit ControllerBase()
     
+    [<HttpGet("{email}")>]
+    member __.GetDevProfile([<FromRoute>] email: string) : IActionResult =
+        let profile = repo.GetProfileByEmail(email)
+        match profile with
+        | Some(x) -> OkObjectResult(profile) :> IActionResult
+        | None -> NotFoundResult() :> IActionResult
+
+
     [<HttpGet("seed")>]
     member __.SeedData() = 
+        raise (NotImplementedException())
+
         let profile = DevProfile()
         profile.ProfileName <- "Abner F"
         profile.ProfileBio <- "Just a dev random bio"

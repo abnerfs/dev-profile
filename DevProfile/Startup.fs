@@ -17,7 +17,11 @@ open DevProfile.Repositories
 open DevProfile.Responses
 
 
-type Startup(configuration: IConfiguration) =
+type Startup(configuration: IConfiguration, env: IHostEnvironment) =
+    do
+        ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddJsonFile("appsettings.json", true).AddEnvironmentVariables() |> ignore
+
+
     member _.Configuration = configuration
 
 

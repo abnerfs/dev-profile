@@ -6,10 +6,11 @@ open DevProfile.Models
 open DevProfile.Responses
 open System
 open AutoMapper
+open DevProfile.Config
 
 [<Controller>]
 [<Route("dev-profile")>]
-type DevProfileControler(repo: IDevProfileRepository, mapper: IMapper) =
+type DevProfileControler(repo: IDevProfileRepository, mapper: IMapper, config: DatabaseConfig) =
     inherit ControllerBase()
     
     [<HttpGet("{email}")>]

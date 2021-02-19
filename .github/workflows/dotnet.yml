@@ -21,6 +21,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    
+    - name: App Settings Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: 'DevProfile/appsettings.json'
+      env:
+        MongoConfig.Url: ${{ secrets.MONGO_URL }}
+        MongoConfig.Database: ${{ secrets.MONGO_DATABASE }}
+        
     - name: Restore dependencies
       run: dotnet restore
     - name: Build

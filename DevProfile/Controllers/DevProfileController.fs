@@ -13,10 +13,6 @@ open DevProfile.Config
 type DevProfileControler(repo: IDevProfileRepository, mapper: IMapper, config: DatabaseConfig) =
     inherit ControllerBase()
     
-    [<HttpGet("config")>]
-    member __.GetConfig() =
-        OkObjectResult(config)
-
     [<HttpGet("{email}")>]
     member __.GetDevProfile([<FromRoute>] email: string) : IActionResult =
         let profile = repo.GetProfileByEmail(email)

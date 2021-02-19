@@ -39,11 +39,11 @@ jobs:
       
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o devprofile 
+        dotnet publish -c Release -o ./publish
       
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: './devprofile'
+        package: './publish'

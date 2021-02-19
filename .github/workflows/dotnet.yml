@@ -25,7 +25,7 @@ jobs:
     - name: App Settings Variable Substitution
       uses: microsoft/variable-substitution@v1
       with:
-        files: '/DevProfile/appsettings.json'
+        files: 'DevProfile/appsettings.json'
       env:
         MongoConfig.Url: ${{ secrets.MONGO_URL }}
         MongoConfig.Database: ${{ secrets.MONGO_DATABASE }}
